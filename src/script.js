@@ -6,7 +6,7 @@ import * as dat from "lil-gui";
  * Base
  */
 // Debug
-const gui = new dat.GUI();
+// const gui = new dat.GUI();
 
 // Canvas
 const canvas = document.querySelector("canvas.webgl");
@@ -33,6 +33,20 @@ document.body.appendChild(renderer.domElement);
 
 const loader = new THREE.TextureLoader();
 
+//Load texture and check if loaded properly
+const snow = loader.load(
+  "/textures/snowflake.png",
+  () => {
+    console.log("loading finished");
+  },
+  () => {
+    console.log("loading progressing");
+  },
+  () => {
+    console.log("loading error");
+  }
+);
+
 /**
  * Objects
  */
@@ -56,8 +70,8 @@ particleGeometry.setAttribute(
 // Materials
 
 const particlesMaterial = new THREE.PointsMaterial({
-  size: 0.003,
-  transparent: true,
+  size: 0.009,
+  map: snow,
 });
 
 // Mesh
